@@ -49,7 +49,15 @@ function saveData(event) {
     var newSchedule = JSON.parse(localStorage.getItem("schedule"));
 }
 
-// loop through all textareas and set their appropriate stored content
-for (i = 0; i < schedule.length; i++) {
-    $("textarea")[i].textContent = schedule[i];
+// loop through all textareas and set their appropriate stored content, functional for multiple-purposes
+function fillSchedule() {
+    for (i = 0; i < schedule.length; i++) {
+        textarea = $(".container").children().eq(i).children().eq(1);
+        console.log($(".container").children());
+        textarea.val(schedule[i]);
+        //if(schedule[i]) 
+        //console.log(textarea.siblings())
+    }
 }
+
+fillSchedule();
