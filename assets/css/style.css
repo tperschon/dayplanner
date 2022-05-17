@@ -68,6 +68,7 @@ body {
   }
   
   .saveBtn {
+    display: flex;
     border-left: 1px solid black;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -75,6 +76,7 @@ body {
     color: white;
     text-decoration: none !important; /* !important with no text-decoration to get rid of nasty outlining of link */
     justify-content: center;
+    align-items: center;
   }
   
   .saveBtn i:hover {
