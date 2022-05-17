@@ -12,6 +12,13 @@ body {
     border-left: 1px solid black;
     padding: 10px;
   }
+
+  /* when a textarea is being used, highlight it */
+  textarea:focus {
+    outline: none;
+    border: 2px solid #06aed5;
+    border-radius: 2px;
+  }
   
   .jumbotron {
     text-align: center;
@@ -66,10 +73,11 @@ body {
     border-bottom-right-radius: 15px;
     background-color: #06aed5;
     color: white;
+    text-decoration: none !important; /* !important with no text-decoration to get rid of nasty outlining of link */
+    justify-content: center;
   }
   
   .saveBtn i:hover {
     font-size: 20px;
     transition: all 0.3s ease-in-out;
   }
-  
