@@ -63,16 +63,38 @@ function fillSchedule() {
 
 // function to color textarea backgrounds based on if they're past, current, or future
 function colorTextareas() {
+    // new moment for if running function well after page load
     var now = moment();
+    // loop through textareas
     for (i = 0; i < 9; i++) {
         if (moment(now).format("HH") > (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("past");
-        else if (moment(now).format("HH") === (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("present");
+        else if (moment(now).format("HH") == (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("present");
         else $(".container").children().eq(i).children().eq(1).addClass("future");
     }
 }
-
+var testS = moment().seconds();
+console.log(testS);
+var t = document.createElement("span");
+$(".jumbotron").append(t)
+setInterval(function() {
+    var testS = moment().seconds();
+    t.textContent = testS;
+    console.log("te")
+}, 1000)
+var testSeconds = ((59 - Number(moment().format("mm"))) * 60 + (59 - Number(moment().format("ss")))) * 1000 + (1000 - moment().milliseconds());
+console.log(testSeconds)
+console.log(moment().milliseconds())
+var msToHour = (60 - Number(moment().format("mm"))) * 60 * 1000;
+console.log(msToHour)
+// var testNum = Number(test)
+// var testSum = (60 - testNum) * 60000;
+setTimeout(function() {
+    console.log("heck")
+}, msToHour)
+// console.log(test)
+// console.log(testNum)
+// console.log(testSum)
 colorTextareas();
-console.log(moment(today).format("HH"))
 //if (moment(today).format("HH") )
 // var timer = setInterval(function() {
 //     if ()
