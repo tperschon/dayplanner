@@ -74,7 +74,7 @@ body {
     border-bottom-right-radius: 15px;
     background-color: #06aed5;
     color: white;
-    text-decoration: none !important; /* !important with no text-decoration to get rid of nasty outlining of link */
+    text-decoration: none !important; /* !important with no text-decoration to get rid of nasty outlining of icon/a link */
     justify-content: center;
     align-items: center;
   }

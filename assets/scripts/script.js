@@ -52,12 +52,30 @@ function saveData(event) {
 // loop through all textareas and set their appropriate stored content, functional for multiple-purposes
 function fillSchedule() {
     for (i = 0; i < schedule.length; i++) {
+        // assign textarea to container>children[i]>children[1] which is the textarea pertinent to the index of the loop
         textarea = $(".container").children().eq(i).children().eq(1);
-        console.log($(".container").children());
+        // set the text value to the pertinent text retrieved from localStorage, which is achieved through same loop index
         textarea.val(schedule[i]);
-        //if(schedule[i]) 
-        //console.log(textarea.siblings())
+        // if there is a real value, set a lock on the button to show user that they don't need to manually save this
+        if(schedule[i]) textarea.siblings().eq(1).children().addClass("fa-lock")
     }
 }
+
+// function to color textarea backgrounds based on if they're past, current, or future
+function colorTextareas() {
+    var now = moment();
+    for (i = 0; i < 9; i++) {
+        if (moment(now).format("HH") > (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("past");
+        else if (moment(now).format("HH") === (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("present");
+        else $(".container").children().eq(i).children().eq(1).addClass("future");
+    }
+}
+
+colorTextareas();
+console.log(moment(today).format("HH"))
+//if (moment(today).format("HH") )
+// var timer = setInterval(function() {
+//     if ()
+// }, 1000);
 
 fillSchedule();
