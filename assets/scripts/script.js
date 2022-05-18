@@ -5,8 +5,11 @@ var dayused = moment(JSON.parse(localStorage.getItem("dayused"))).format("MM/DD/
 var today = moment();
 
 // reset localstorage if dayused isn't today, clear localStorage if so
-if (dayused !== moment(today).format("MM/DD/YYYY")) localStorage.clear();
+function clearDay() {
+    if (dayused !== moment(today).format("MM/DD/YYYY")) localStorage.clear();
+}
 
+clearDay();
 // store current date/time in localstorage
 localStorage.setItem("dayused", JSON.stringify(today));
 
@@ -47,7 +50,7 @@ function saveData(event) {
     schedule[index] = text;
     localStorage.setItem("schedule", JSON.stringify(schedule));
     var newSchedule = JSON.parse(localStorage.getItem("schedule"));
-}
+};
 
 // loop through all textareas and set their appropriate stored content, functional for multiple-purposes
 function fillSchedule() {
@@ -57,9 +60,9 @@ function fillSchedule() {
         // set the text value to the pertinent text retrieved from localStorage, which is achieved through same loop index
         textarea.val(schedule[i]);
         // if there is a real value, set a lock on the button to show user that they don't need to manually save this
-        if(schedule[i]) textarea.siblings().eq(1).children().addClass("fa-lock")
+        if(schedule[i]) textarea.siblings().eq(1).children().addClass("fa-lock");
     }
-}
+};
 
 // function to color textarea backgrounds based on if they're past, current, or future
 function colorTextareas() {
@@ -71,33 +74,27 @@ function colorTextareas() {
         else if (moment(now).format("HH") == (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("present");
         else $(".container").children().eq(i).children().eq(1).addClass("future");
     }
-}
-var testS = moment().seconds();
-console.log(testS);
-var t = document.createElement("span");
-$(".jumbotron").append(t)
-setInterval(function() {
-    var testS = moment().seconds();
-    t.textContent = testS;
-    console.log("te")
-}, 1000)
-var testSeconds = ((59 - Number(moment().format("mm"))) * 60 + (59 - Number(moment().format("ss")))) * 1000 + (1000 - moment().milliseconds());
-console.log(testSeconds)
-console.log(moment().milliseconds())
-var msToHour = (60 - Number(moment().format("mm"))) * 60 * 1000;
-console.log(msToHour)
-// var testNum = Number(test)
-// var testSum = (60 - testNum) * 60000;
-setTimeout(function() {
-    console.log("heck")
-}, msToHour)
-// console.log(test)
-// console.log(testNum)
-// console.log(testSum)
-colorTextareas();
-//if (moment(today).format("HH") )
-// var timer = setInterval(function() {
-//     if ()
-// }, 1000);
+};
 
+//// variables to calculate ms to hour, done as 4 variables for clarity rather than one big line of math
+// how many minutes left in the current hour
+var minToHour = 59 - moment().minutes();
+// how many seconds left in the current minute
+var secToMin = 59 - moment().seconds();
+// how many milliseconds left in the current second
+var msToSec = 999 - moment().milliseconds();
+// add them all up, 60 seconds in a minute and 1000 milliseconds in a second
+var msToHour = (minToHour * 60 * 1000) + (secToMin * 1000) + msToSec;
+
+// after we get to the next hour, update the colors and start a recurring hourly update to the colors
+setTimeout(function() {
+    colorTextareas();
+    autoUpdate();
+}, msToHour);
+
+function autoUpdate() {
+    setInterval(colorTextareas,3600000);
+}
+
+colorTextareas();
 fillSchedule();
