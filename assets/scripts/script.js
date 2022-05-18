@@ -6,10 +6,9 @@ var today = moment();
 
 // reset localstorage if dayused isn't today, clear localStorage if so
 function clearDay() {
-    if (dayused !== moment(today).format("MM/DD/YYYY")) localStorage.clear();
+    if (dayused !== moment().format("MM/DD/YYYY")) localStorage.clear();
 }
 
-clearDay();
 // store current date/time in localstorage
 localStorage.setItem("dayused", JSON.stringify(today));
 
@@ -92,9 +91,17 @@ setTimeout(function() {
     autoUpdate();
 }, msToHour);
 
+// will change textarea backgrounds every hour and check if the day has changed and reset everything if it has
 function autoUpdate() {
-    setInterval(colorTextareas,3600000);
+    setInterval(function() {
+        colorTextareas();
+        clearDay();
+        fillSchedule();
+    },3600000);
 }
 
+// on page load, color text areas, clear the day if it needs to be, and fill out schedule from localstorage
+// fillSchedule after clearDay so if day is cleared, we don't populate our textareas with outdated information
 colorTextareas();
+clearDay();
 fillSchedule();
