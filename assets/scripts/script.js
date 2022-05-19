@@ -56,6 +56,8 @@ function fillSchedule() {
     for (i = 0; i < schedule.length; i++) {
         // assign textarea to container>children[i]>children[1] which is the textarea pertinent to the index of the loop
         textarea = $(".container").children().eq(i).children().eq(1);
+        // if there is already a value in the field (such as when this is called on hourly update) store it in schedule
+        if (textarea.val()) schedule[i] = textarea.val();
         // set the text value to the pertinent text retrieved from localStorage, which is achieved through same loop index
         textarea.val(schedule[i]);
         // if there is a real value, set a lock on the button to show user that they don't need to manually save this
