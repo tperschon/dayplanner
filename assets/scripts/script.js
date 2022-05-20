@@ -7,7 +7,7 @@ var today = moment();
 // reset localstorage if dayused isn't today, clear localStorage if so
 function clearDay() {
     if (dayused !== moment().format("MM/DD/YYYY")) localStorage.clear();
-}
+};
 
 // store current date/time in localstorage
 localStorage.setItem("dayused", JSON.stringify(today));
@@ -61,7 +61,7 @@ function fillSchedule() {
         // set the text value to the pertinent text retrieved from localStorage, which is achieved through same loop index
         textarea.val(schedule[i]);
         // if there is a real value, set a lock on the button to show user that they don't need to manually save this
-        if(schedule[i]) textarea.siblings().eq(1).children().addClass("fa-lock");
+        if (schedule[i]) textarea.siblings().eq(1).children().addClass("fa-lock");
     }
 };
 
@@ -71,8 +71,11 @@ function colorTextareas() {
     var now = moment();
     // loop through textareas
     for (i = 0; i < 9; i++) {
+        // if hour corresponding to textarea has elapsed, add "past" class for css formatting takeover
         if (moment(now).format("HH") > (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("past");
+        // else if hour corresponding to textarea is current, add "present" class for css formatting takeover
         else if (moment(now).format("HH") == (i + 9)) $(".container").children().eq(i).children().eq(1).addClass("present");
+        // else  add "future" class for css formatting takeover
         else $(".container").children().eq(i).children().eq(1).addClass("future");
     }
 };
@@ -86,21 +89,22 @@ var secToMin = 59 - moment().seconds();
 var msToSec = 999 - moment().milliseconds();
 // add them all up, 60 seconds in a minute and 1000 milliseconds in a second
 var msToHour = (minToHour * 60 * 1000) + (secToMin * 1000) + msToSec;
-
+console.log(msToHour);
 // after we get to the next hour, update the colors and start a recurring hourly update to the colors
-setTimeout(function() {
+setTimeout(function () {
     colorTextareas();
     autoUpdate();
 }, msToHour);
 
 // will change textarea backgrounds every hour and check if the day has changed and reset everything if it has
 function autoUpdate() {
-    setInterval(function() {
+    setInterval(function () {
         colorTextareas();
         clearDay();
         fillSchedule();
-    },3600000);
-}
+        console.log("test")
+    }, 60 * 60 * 1000);
+};
 
 // on page load, color text areas, clear the day if it needs to be, and fill out schedule from localstorage
 // fillSchedule after clearDay so if day is cleared, we don't populate our textareas with outdated information
