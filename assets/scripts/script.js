@@ -6,7 +6,11 @@ var today = moment();
 
 // reset localstorage if dayused isn't today, clear localStorage if so
 function clearDay() {
-    if (dayused !== moment().format("MM/DD/YYYY")) localStorage.clear();
+    if (dayused !== moment().format("MM/DD/YYYY")) {
+        localStorage.clear();
+        // if localStorage gets cleared, that means we need to set a new day, since this is a function and gets called later
+        localStorage.setItem("dayused", JSON.stringify(moment().format("MM/DD/YYYY")));
+    }
 };
 
 // store current date/time in localstorage
@@ -31,6 +35,11 @@ function dataChanged(event) {
 
 // when a save button is clicked, save the textarea and show user it was saved
 $(".saveBtn").click(saveData);
+$("i").click(function (event) {
+    console.log("Heck")
+    console.log(event.target)
+    saveData(event)
+});
 
 // saves data corresponding to the savebutton pressed to localstorage
 function saveData(event) {
