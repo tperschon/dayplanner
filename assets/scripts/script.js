@@ -42,7 +42,7 @@ function saveData(event) {
     event.preventDefault();
     //// store elements we work with
     // conditional to handle of the <i> within the <a> is clicked
-    if(event.target.nodeName === "I") var savebutton = $(event.target).parent();
+    if (event.target.nodeName === "I") var savebutton = $(event.target).parent();
     else var savebutton = $(event.target);              // the save button user clicked
     var textarea = savebutton.siblings().eq(1);         // the textarea sibling of the save button
     var icon = savebutton.children();                   // the icon of the save button
