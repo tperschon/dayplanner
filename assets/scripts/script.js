@@ -35,20 +35,17 @@ function dataChanged(event) {
 
 // when a save button is clicked, save the textarea and show user it was saved
 $(".saveBtn").click(saveData);
-$("i").click(function (event) {
-    console.log("Heck")
-    console.log(event.target)
-    saveData(event)
-});
 
 // saves data corresponding to the savebutton pressed to localstorage
 function saveData(event) {
     // stops us from being navigated to top of page
     event.preventDefault();
-    // store elements we work with
-    var savebutton = $(event.target);                   // the save button user clicked
+    //// store elements we work with
+    // conditional to handle of the <i> within the <a> is clicked
+    if(event.target.nodeName === "I") var savebutton = $(event.target).parent();
+    else var savebutton = $(event.target);              // the save button user clicked
     var textarea = savebutton.siblings().eq(1);         // the textarea sibling of the save button
-    var icon = savebutton.children(0);                  // the icon of the save button
+    var icon = savebutton.children();                   // the icon of the save button
     var text = textarea.val();                          // the actual text of the textarea
     var index = textarea.attr("data-index-number");     // the index value of the textarea
     // set icon to be locked, indicating saving of data
@@ -57,7 +54,6 @@ function saveData(event) {
     // save data in textarea to localStorage
     schedule[index] = text;
     localStorage.setItem("schedule", JSON.stringify(schedule));
-    var newSchedule = JSON.parse(localStorage.getItem("schedule"));
 };
 
 // loop through all textareas and set their appropriate stored content, functional for multiple-purposes
@@ -98,7 +94,7 @@ var secToMin = 59 - moment().seconds();
 var msToSec = 999 - moment().milliseconds();
 // add them all up, 60 seconds in a minute and 1000 milliseconds in a second
 var msToHour = (minToHour * 60 * 1000) + (secToMin * 1000) + msToSec;
-console.log(msToHour);
+
 // after we get to the next hour, update the colors and start a recurring hourly update to the colors
 setTimeout(function () {
     colorTextareas();
@@ -111,7 +107,6 @@ function autoUpdate() {
         colorTextareas();
         clearDay();
         fillSchedule();
-        console.log("test")
     }, 60 * 60 * 1000);
 };
 
