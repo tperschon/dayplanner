@@ -33,6 +33,7 @@ THEN the saved events persist
 ```
 
 # About #
+
 ```
 At the very top of the screen, below the title, will be the current date.
 An office hours working day will be presented in blocks of one hour, labeled on the left with the time they represent.
@@ -50,3 +51,9 @@ Unsaved information is lost when reloading the page.
 Every day, the schedule is deleted, regardless of whether or not it was saved.
 ```
 ![All schedule information is deleted each day.](assets/images/newday.png)
+
+# Links #
+
+[Github](https://github.com/tperschon/dayplanner)
+
+[Live Site](https://tperschon.github.io/dayplanner)
