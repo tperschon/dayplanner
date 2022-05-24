@@ -42,7 +42,7 @@ Clicking on the button will save the information inside the text area.
 ```
 ![Overview of entire page.](assets/images/overview.png)
 ```
-Reloading the page will retireve saved information.
+Reloading the page will retrieve saved information.
 Unsaved information is lost when reloading the page.
 ```
 ![Unsaved information is gone when reloaded.](assets/images/reloaded.png)
