@@ -34,7 +34,7 @@ THEN the saved events persist
 
 # About #
 ```
-At the very top of the screen, below the title, you will the current date.
+At the very top of the screen, below the title, will be the current date.
 An office hours working day will be presented in blocks of one hour, labeled on the left with the time they represent.
 On the right of each hour is a blue save button.
 This save button will be blank if there is no information in the corresponding block, it will have an unlocked icon if there is unsaved information, and a locked icon if there is information that is saved.
