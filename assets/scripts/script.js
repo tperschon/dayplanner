@@ -16,10 +16,8 @@ function clearDay() {
 // store current date/time in localstorage
 localStorage.setItem("dayused", JSON.stringify(today));
 
-// retrieve array of stored schedule items, if any exists
+// initialize an empty array for later use
 var schedule = [];
-var storedSchedule = JSON.parse(localStorage.getItem("schedule"));
-if (storedSchedule !== null) schedule = storedSchedule;
 
 // set the text of date/time header to current day/month with "-day, Month nth/nst"
 $("#currentDay").text(today.format("dddd, MMMM Do"));
@@ -58,6 +56,9 @@ function saveData(event) {
 
 // loop through all textareas and set their appropriate stored content, functional for multiple-purposes
 function fillSchedule() {
+    // retrieve stored schedule, and if it exists, assign it to the working schedule variable
+    var storedSchedule = JSON.parse(localStorage.getItem("schedule"));
+    if (storedSchedule) schedule = storedSchedule;
     for (i = 0; i < schedule.length; i++) {
         // assign textarea to container>children[i]>children[1] which is the textarea pertinent to the index of the loop
         textarea = $(".container").children().eq(i).children().eq(1);
